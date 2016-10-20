@@ -59,7 +59,7 @@ def run(url,file):
 	returncode, returnmsg, headers = h.getreply()
 	data=h.getfile().read()
 	data=re.sub('<b>','',data)
-        for e in ('>','=','<','\\','(',')','"','http',':','//'):
+    for e in ['>','=','<','\\','(',')','"','http',':','//']:
 		data = string.replace(data,e,' ')
 	r1 = re.compile('[-_.a-zA-Z0-9.-_]*'+'\.'+file)	
 	res = r1.findall(data) 
@@ -75,11 +75,11 @@ def search(argv):
 	      opts, args = getopt.getopt(argv,"d:f:")
  
 	except getopt.GetoptError:
-  	     	usage()
+  	    usage()
 		sys.exit()
 	
 	for opt,arg in opts :
-    	   	if opt == '-f' :
+    	if opt == '-f' :
 			file=arg
 		elif opt == '-d':
 			url=arg
@@ -92,7 +92,7 @@ def search(argv):
 
 	while cant < limit:
 		res = run(url,file)
-		result = [x for x in res if res.count(x) == 1]
+		result += [x for x in res if x not in result]
 		#for x in res:
 		#	if result.count(x) == 0:
         #			result.append(x)
