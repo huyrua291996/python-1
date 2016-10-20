@@ -40,30 +40,30 @@ print "|                            Development by Arsh Leak.                   
 print "|                         $ Wget > http://github.com/4rsh                    |"
 print "+----------------------------------------------------------------------------+"
 def usage():
-    print W+ "                                  OPTIONS:"
-    print B+"                                -d: Domain"
-    print "                            -f: File (ex. php)"
-    print "                  Ex:./webmap.py -d target.com -f php\n"
-    print W+ ""
+ print W+ "                                  OPTIONS:"
+ print B+"                                -d: Domain"
+ print "                            -f: File (ex. php)"
+ print "                  Ex:./webmap.py -d target.com -f php\n"
+ print W+ ""
 
-    sys.exit()
+ sys.exit()
 
 def run(url,file):
 
-    h = httplib.HTTP('www.google.com')
-    h.putrequest('GET',"/search?num=500&q=site:"+url+"+filetype:"+file)
-    h.putheader('Host', 'www.google.com')
-    h.putheader('User-agent', 'Internet Explorer 6.0 ')
-    h.putheader('Referrer', 'www.github.com/4rsh/')
-    h.endheaders() 
-    returncode, returnmsg, headers = h.getreply()
-    data=h.getfile().read()
-    data=re.sub('<b>','',data)
+	h = httplib.HTTP('www.google.com')
+	h.putrequest('GET',"/search?num=500&q=site:"+url+"+filetype:"+file)
+	h.putheader('Host', 'www.google.com')
+	h.putheader('User-agent', 'Internet Explorer 6.0 ')
+	h.putheader('Referrer', 'www.github.com/4rsh/')
+	h.endheaders()
+	returncode, returnmsg, headers = h.getreply()
+	data=h.getfile().read()
+	data=re.sub('<b>','',data)
     for e in ['>','=','<','\\','(',')','"','http',':','//']:
-	data = string.replace(data,e,' ')
+		data = string.replace(data,e,' ')
 	r1 = re.compile('[-_.a-zA-Z0-9.-_]*'+'\.'+file)	
 	res = r1.findall(data) 
-    return res 
+	return res 
 	
 
 def search(argv):
@@ -72,14 +72,14 @@ def search(argv):
 	if len(sys.argv) < 2: 
 		usage() 
 	try :
-		opts, args = getopt.getopt(argv,"d:f:")
+	      opts, args = getopt.getopt(argv,"d:f:")
  
 	except getopt.GetoptError:
-  		usage()
+  	    usage()
 		sys.exit()
 	
 	for opt,arg in opts :
-    		if opt == '-f' :
+    	if opt == '-f' :
 			file=arg
 		elif opt == '-d':
 			url=arg
@@ -95,7 +95,7 @@ def search(argv):
 		result += [x for x in res if x not in result]
 		#for x in res:
 		#	if result.count(x) == 0:
-                #		result.append(x)
+        #			result.append(x)
 		cant+=100
 			
 
