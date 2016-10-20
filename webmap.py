@@ -92,9 +92,10 @@ def search(argv):
 
 	while cant < limit:
 		res = run(url,file)
-		for x in res:
-			if result.count(x) == 0:
-        			result.append(x)
+		result = [x for x in res if res.count(x) == 1]
+		#for x in res:
+		#	if result.count(x) == 0:
+        #			result.append(x)
 		cant+=100
 			
 
